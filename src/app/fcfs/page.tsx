@@ -16,16 +16,16 @@ const Window = ({
   textColor?: string;
 }) => {
   return (
-    <div className={`${bgColor} border-4 border-purple-900 shadow-[8px_8px_0_0_rgba(0,0,0,0.3)] mb-4`}>
+    <div className={`${bgColor} border-4 border-white shadow-[8px_8px_0_0_rgba(0,0,0,0.3)] mb-4`}>
       {/* Window Title Bar */}
       <div className="bg-purple-900 px-2 py-1 flex items-center justify-between border-b-4 border-purple-950">
         <div className="flex items-center gap-2">
-          <span className={`text-yellow-400 font-bold text-xs uppercase font-mono`}>{title}</span>
+          <span className={`text-yellow-400 font-bold text-xs uppercase font-mono pixel-text`} style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.3)', letterSpacing: '0.05em' }}>{title}</span>
         </div>
         <div className="flex gap-1">
-          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
-          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
           <div className="w-3 h-3 bg-red-500 border-2 border-red-700"></div>
+          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
+          <div className="w-3 h-3 bg-green-500 border-2 border-green-700"></div>
         </div>
       </div>
       {/* Window Content */}
@@ -145,7 +145,7 @@ export default function FCFSPage() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="text-yellow-400 font-bold text-3xl uppercase tracking-wider pixel-text">
+            <h1 className="text-yellow-400 font-bold text-3xl uppercase tracking-wider pixel-text" style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.3)', letterSpacing: '0.05em' }}>
               FCFS Scheduling Simulator
             </h1>
             <Link

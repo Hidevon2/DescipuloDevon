@@ -61,16 +61,16 @@ const Window = ({
   textColor?: string;
 }) => {
   return (
-    <div className={`${bgColor} border-4 border-purple-900 shadow-[8px_8px_0_0_rgba(0,0,0,0.3)] mb-4`}>
+    <div className={`${bgColor} border-4 border-white shadow-[8px_8px_0_0_rgba(0,0,0,0.3)] mb-4`}>
       {/* Window Title Bar */}
       <div className="bg-purple-900 px-2 py-1 flex items-center justify-between border-b-4 border-purple-950">
         <div className="flex items-center gap-2">
-          <span className={`${textColor} font-bold text-xs uppercase font-mono`}>{title}</span>
+          <span className={`text-yellow-400 font-bold text-xs uppercase font-mono pixel-text`} style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.3)', letterSpacing: '0.05em' }}>{title}</span>
         </div>
         <div className="flex gap-1">
-          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
-          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
           <div className="w-3 h-3 bg-red-500 border-2 border-red-700"></div>
+          <div className="w-3 h-3 bg-yellow-400 border-2 border-yellow-600"></div>
+          <div className="w-3 h-3 bg-green-500 border-2 border-green-700"></div>
         </div>
       </div>
       {/* Window Content */}
@@ -190,9 +190,9 @@ export default function Home() {
     <main className="min-h-screen bg-purple-950 p-4 font-mono" style={{ background: '#1a0d2e' }}>
       <div className="max-w-7xl mx-auto">
         {/* Title Bar */}
-        <div className="bg-purple-900 px-4 py-2 mb-4 border-4 border-purple-950 flex items-center justify-between">
+        <div className="bg-purple-900 px-4 py-2 mb-4 border-4 border-white shadow-[8px_8px_0_0_rgba(0,0,0,0.3)] flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <h1 className="text-yellow-400 font-bold text-xl uppercase tracking-wider">MY RESUME</h1>
+            <h1 className="text-yellow-400 font-bold text-xl uppercase tracking-wider pixel-text" style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.3)', letterSpacing: '0.05em' }}>MY RESUME</h1>
             <Link
               href="/fcfs"
               className="px-3 py-1 border-2 border-purple-950 font-bold text-xs uppercase bg-cyan-500 text-white hover:bg-cyan-600 transition-colors"
@@ -352,59 +352,61 @@ export default function Home() {
           {/* Right Column */}
           <div className="space-y-4">
             {/* Skills Window */}
-            <div className="rounded-lg p-6 mb-4 border-4 border-purple-900 shadow-[8px_8px_0_0_rgba(0,0,0,0.3)]" style={{ background: '#2d1b4e' }}>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-yellow-400 text-xl">🔧</span>
-                <h3 className="text-white font-bold text-lg">Skills</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {resumeData.skills.map((skill, index) => (
-                  <div key={skill.id} className="relative">
-                    {isEditing && (
-                      <button
-                        onClick={() => removeSkill(skill.id)}
-                        className="absolute -top-1 -right-1 bg-red-500 text-white w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full z-10"
-                      >
-                        ×
-                      </button>
-                    )}
-                    <div className="bg-gray-700 border border-gray-500 rounded-full px-3 py-2 flex items-center gap-2 hover:bg-gray-600 transition-colors">
-                      {isEditing ? (
-                        <div className="flex items-center gap-2 w-full">
-                          <input
-                            type="text"
-                            value={skill.icon}
-                            onChange={(e) => updateSkill(index, 'icon', e.target.value)}
-                            className="w-6 bg-gray-600 text-white text-xs border border-gray-500 rounded px-1"
-                            placeholder="🔷"
-                          />
-                          <input
-                            type="text"
-                            value={skill.name}
-                            onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                            className="flex-1 bg-gray-600 text-white text-xs border border-gray-500 rounded px-2 py-1"
-                            placeholder="Skill Name"
-                          />
-                        </div>
-                      ) : (
-                        <>
-                          <span className="text-sm">{skill.icon}</span>
-                          <span className="text-white text-sm font-medium">{skill.name}</span>
-                        </>
+            <Window title="🔧 SKILLS" bgColor="bg-purple-200" textColor="text-purple-900">
+              <div className="rounded-lg p-4 border-2 border-purple-800" style={{ background: '#2d1b4e' }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-yellow-400 text-xl">🔧</span>
+                  <h3 className="text-white font-bold text-lg pixel-text" style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.3)', letterSpacing: '0.05em' }}>Skills</h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {resumeData.skills.map((skill, index) => (
+                    <div key={skill.id} className="relative">
+                      {isEditing && (
+                        <button
+                          onClick={() => removeSkill(skill.id)}
+                          className="absolute -top-1 -right-1 bg-red-500 text-white w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full z-10"
+                        >
+                          ×
+                        </button>
                       )}
+                      <div className="bg-gray-700 border border-gray-500 rounded-full px-3 py-2 flex items-center gap-2 hover:bg-gray-600 transition-colors">
+                        {isEditing ? (
+                          <div className="flex items-center gap-2 w-full">
+                            <input
+                              type="text"
+                              value={skill.icon}
+                              onChange={(e) => updateSkill(index, 'icon', e.target.value)}
+                              className="w-6 bg-gray-600 text-white text-xs border border-gray-500 rounded px-1"
+                              placeholder="🔷"
+                            />
+                            <input
+                              type="text"
+                              value={skill.name}
+                              onChange={(e) => updateSkill(index, 'name', e.target.value)}
+                              className="flex-1 bg-gray-600 text-white text-xs border border-gray-500 rounded px-2 py-1"
+                              placeholder="Skill Name"
+                            />
+                          </div>
+                        ) : (
+                          <>
+                            <span className="text-sm">{skill.icon}</span>
+                            <span className="text-white text-sm font-medium">{skill.name}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                {isEditing && (
+                  <button
+                    onClick={addSkill}
+                    className="mt-4 w-full bg-gray-700 text-white py-2 font-bold text-sm uppercase border border-gray-500 rounded-full hover:bg-gray-600 transition-colors"
+                  >
+                    + ADD SKILL
+                  </button>
+                )}
               </div>
-              {isEditing && (
-                <button
-                  onClick={addSkill}
-                  className="mt-4 w-full bg-gray-700 text-white py-2 font-bold text-sm uppercase border border-gray-500 rounded-full hover:bg-gray-600 transition-colors"
-                >
-                  + ADD SKILL
-                </button>
-              )}
-            </div>
+            </Window>
 
             {/* Projects Window */}
             <Window title="PROJECTS" bgColor="bg-yellow-300" textColor="text-purple-900">
