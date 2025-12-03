@@ -95,6 +95,16 @@ export default function Home() {
       { id: 1, name: "Graphic Design Certificate", issuer: "", year: "2022" },
       { id: 2, name: "Web Design Fundamentals", issuer: "", year: "2023" }
     ],
+    skills: [
+      { id: 1, name: "HTML", icon: "🔶" },
+      { id: 2, name: "CSS", icon: "🔵" },
+      { id: 3, name: "JavaScript", icon: "🟡" },
+      { id: 4, name: "React", icon: "⚛️" },
+      { id: 5, name: "Next.js", icon: "▲" },
+      { id: 6, name: "Tailwind CSS", icon: "💨" },
+      { id: 7, name: "GitHub", icon: "🐙" },
+      { id: 8, name: "Git", icon: "💎" }
+    ],
     projects: [
       { 
         id: 1, 
@@ -159,6 +169,21 @@ export default function Home() {
 
   const removeProject = (id: number) => {
     updateField('projects', resumeData.projects.filter(p => p.id !== id));
+  };
+
+  const updateSkill = (index: number, field: string, value: string) => {
+    const updated = [...resumeData.skills];
+    updated[index] = { ...updated[index], [field]: value };
+    updateField('skills', updated);
+  };
+
+  const addSkill = () => {
+    const newSkill = { id: Date.now(), name: "", icon: "🔷" };
+    updateField('skills', [...resumeData.skills, newSkill]);
+  };
+
+  const removeSkill = (id: number) => {
+    updateField('skills', resumeData.skills.filter(s => s.id !== id));
   };
 
   return (
@@ -326,6 +351,61 @@ export default function Home() {
 
           {/* Right Column */}
           <div className="space-y-4">
+            {/* Skills Window */}
+            <div className="rounded-lg p-6 mb-4 border-4 border-purple-900 shadow-[8px_8px_0_0_rgba(0,0,0,0.3)]" style={{ background: '#2d1b4e' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-yellow-400 text-xl">🔧</span>
+                <h3 className="text-white font-bold text-lg">Skills</h3>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {resumeData.skills.map((skill, index) => (
+                  <div key={skill.id} className="relative">
+                    {isEditing && (
+                      <button
+                        onClick={() => removeSkill(skill.id)}
+                        className="absolute -top-1 -right-1 bg-red-500 text-white w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full z-10"
+                      >
+                        ×
+                      </button>
+                    )}
+                    <div className="bg-gray-700 border border-gray-500 rounded-full px-3 py-2 flex items-center gap-2 hover:bg-gray-600 transition-colors">
+                      {isEditing ? (
+                        <div className="flex items-center gap-2 w-full">
+                          <input
+                            type="text"
+                            value={skill.icon}
+                            onChange={(e) => updateSkill(index, 'icon', e.target.value)}
+                            className="w-6 bg-gray-600 text-white text-xs border border-gray-500 rounded px-1"
+                            placeholder="🔷"
+                          />
+                          <input
+                            type="text"
+                            value={skill.name}
+                            onChange={(e) => updateSkill(index, 'name', e.target.value)}
+                            className="flex-1 bg-gray-600 text-white text-xs border border-gray-500 rounded px-2 py-1"
+                            placeholder="Skill Name"
+                          />
+                        </div>
+                      ) : (
+                        <>
+                          <span className="text-sm">{skill.icon}</span>
+                          <span className="text-white text-sm font-medium">{skill.name}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {isEditing && (
+                <button
+                  onClick={addSkill}
+                  className="mt-4 w-full bg-gray-700 text-white py-2 font-bold text-sm uppercase border border-gray-500 rounded-full hover:bg-gray-600 transition-colors"
+                >
+                  + ADD SKILL
+                </button>
+              )}
+            </div>
+
             {/* Projects Window */}
             <Window title="PROJECTS" bgColor="bg-yellow-300" textColor="text-purple-900">
               <div className="space-y-4">
