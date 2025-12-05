@@ -75,7 +75,7 @@ export default function Home() {
       { id: 4, startYear: "2011", endYear: "2016", institution: "Yati Elementary School" }
     ],
     workExperience: [
-      { id: 1, company: "ABYROAD RESTOBAR", startYear: "2025", endYear: "Present" },
+      { id: 1, company: "CASADYA", startYear: "2025", endYear: "Present" },
       { id: 2, company: "UBEST", startYear: "2024", endYear: "2025" }
     ]
   };
